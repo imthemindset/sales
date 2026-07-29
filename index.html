@@ -63,7 +63,7 @@
 
   /* ---------- HEADER ---------- */
   header{
-    padding:26px 0;
+    padding:20px 0;
     border-bottom:1px solid var(--border);
   }
   header .wrap{display:flex;justify-content:space-between;align-items:center;}
@@ -88,12 +88,13 @@
   header nav a:hover{border-color:var(--gold);color:var(--gold-bright);}
 
   /* ---------- HERO ---------- */
-  .hero .wrap{
-  display:grid;
-  grid-template-columns:1.15fr 0.85fr;
-  gap:56px;
-  align-items:center;
-}
+  .hero{
+    padding:64px 0 56px;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
   .hero h1{
     font-size:clamp(40px,5.6vw,68px);
     margin:20px 0 26px;
@@ -185,7 +186,7 @@
   .stats{
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
-    padding:44px 0;
+    padding:36px 0;
   }
   .stats .wrap{
     display:grid;
@@ -208,11 +209,11 @@
   }
 
   /* ---------- DOR ---------- */
-  .section{padding:88px 0;}
+  .section{padding:64px 0;}
   .section h2{
-    font-size:clamp(30px,3.6vw,44px);
+    font-size:clamp(28px,3.4vw,40px);
     max-width:16ch;
-    margin:16px 0 48px;
+    margin:14px 0 36px;
   }
   .signs{
     display:grid;
@@ -241,30 +242,25 @@
   }
 
   /* ---------- COMO FUNCIONA ---------- */
-  .steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:0;
-    border-top:1px solid var(--border);
-    border-left:1px solid var(--border);
+  /* ---------- BLOCO DE AUTORIDADE ---------- */
+  .authority-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-left:3px solid var(--gold);
+    border-radius:var(--radius);
+    padding:40px 44px;
+    max-width:680px;
   }
-  .step{
-    padding:32px 26px;
-    border-right:1px solid var(--border);
-    border-bottom:1px solid var(--border);
+  .authority-card h2{
+    font-size:clamp(28px,3.4vw,40px);
+    margin:14px 0 18px;
   }
-  .step .num{
-    font-family:'JetBrains Mono',monospace;
-    color:var(--gold);
-    font-size:13px;
+  .authority-card p{
+    color:var(--text-muted);
+    font-size:16px;
+    max-width:56ch;
+    margin-bottom:28px;
   }
-  .step h3{
-    font-size:22px;
-    margin:14px 0 10px;
-    text-transform:none;
-    letter-spacing:0;
-  }
-  .step p{color:var(--text-muted);font-size:14.5px;}
 
   /* ---------- FORM ---------- */
   .form-section{
@@ -333,11 +329,11 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:860px){
     .wrap{padding:0 26px;}
-    .hero{grid-template-columns:1fr;padding:56px 0 48px;}
+    .hero{grid-template-columns:1fr;padding:48px 0 40px;}
     .signs{grid-template-columns:1fr;}
     .stats .wrap{grid-template-columns:1fr;gap:28px;text-align:left;}
-    .steps{grid-template-columns:1fr;}
     .form-card{padding:28px 22px;}
+    .authority-card{padding:30px 26px;}
     header nav a{padding:8px 14px;}
   }
 
@@ -351,12 +347,12 @@
 <header>
   <div class="wrap">
     <div class="brand">MINDSET<span>.</span></div>
-    <nav><a href="#diagnostico">Quero o diagnóstico</a></nav>
+    <nav><a href="#diagnostico">Quero minha reunião</a></nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="wrap">
+  <div class="wrap" style="display:contents;">
     <div>
       <div class="eyebrow">Para donos de negócio de ticket alto</div>
       <h1>Seu time perde venda na <em>régua errada.</em></h1>
@@ -377,11 +373,11 @@
 <section class="stats">
   <div class="wrap">
     <div>
-      <div class="stat-num">1.300+</div>
+      <div class="stat-num">1.000+</div>
       <div class="stat-label">FECHAMENTOS EM REUNIÃO ÚNICA</div>
     </div>
     <div>
-      <div class="stat-num">7 ANOS</div>
+      <div class="stat-num">10 ANOS</div>
       <div class="stat-label">EM CAMPO, VENDENDO TICKET ALTO</div>
     </div>
     <div>
@@ -414,26 +410,11 @@
 
 <section class="section" style="padding-top:0;">
   <div class="wrap">
-    <div class="eyebrow">Como funciona</div>
-    <h2>Como funciona nossa reunião</h2>
-  </div>
-  <div class="wrap">
-    <div class="steps">
-      <div class="step">
-        <div class="num mono">01</div>
-        <h3>Reunião</h3>
-        <p>Entendo como seu time vende hoje: o processo, o script, onde trava.</p>
-      </div>
-      <div class="step">
-        <div class="num mono">02</div>
-        <h3>Diagnóstico dos gargalos</h3>
-        <p>Aponto exatamente onde a venda está sendo perdida, com exemplo prático.</p>
-      </div>
-      <div class="step">
-        <div class="num mono">03</div>
-        <h3>Direcionamento</h3>
-        <p>Você sai com direção clara sobre os próximos passos, e conhece como funciona meu acompanhamento, se fizer sentido pra você.</p>
-      </div>
+    <div class="authority-card">
+      <div class="eyebrow">Como funciona</div>
+      <h2>Uma reunião, direto ao ponto</h2>
+      <p>Você entra numa reunião comigo, não numa apresentação genérica. Eu já fechei mais de 1.000 vendas de ticket alto ao vivo, então em poucos minutos identifico onde seu time trava, e mostro o caminho pra destravar.</p>
+      <a href="#diagnostico" class="cta-btn">QUERO MINHA REUNIÃO →</a>
     </div>
   </div>
 </section>
@@ -443,7 +424,7 @@
     <div class="form-card">
       <div class="eyebrow">Fale direto comigo</div>
       <h2>Vamos marcar sua reunião</h2>
-      <p>Preenche os campos abaixo, ao enviar, abre o WhatsApp direto comigo, já com seus dados prontos, e a gente marca sua reunião online.</p>
+      <p>Preenche os campos abaixo com seus dados e marcamos a reunião.</p>
 
       <form id="leadForm">
         <div class="field">
@@ -458,20 +439,8 @@
           <label for="whatsapp">Seu WhatsApp</label>
           <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
         </div>
-        <div class="field">
-          <label for="dificuldade">Maior dificuldade hoje</label>
-          <select id="dificuldade" required>
-            <option value="" disabled selected>Selecione uma opção</option>
-            <option>Time marca segunda reunião e a venda esfria</option>
-            <option>Time dá desconto demais sem precisar</option>
-            <option>Time não sabe conduzir objeção</option>
-            <option>Não sei exatamente onde está o problema</option>
-          </select>
-        </div>
         <button type="submit" class="cta-btn submit-btn">FALAR AGORA NO WHATSAPP →</button>
       </form>
-
-      <div class="signal-note">Atendo poucas reuniões por semana pra manter qualidade, respondo pessoalmente.</div>
     </div>
   </div>
 </section>
@@ -486,14 +455,13 @@
 <script>
   // ATENÇÃO: troque pelo seu número de WhatsApp, formato internacional sem espaços/símbolos
   // Exemplo: 55 (Brasil) + DDD + número → 5566999999999
-  const WHATSAPP_NUMERO = "5541999999999";
+  const WHATSAPP_NUMERO = "55SEUNUMEROAQUI";
 
   document.getElementById('leadForm').addEventListener('submit', function(e){
     e.preventDefault();
     const nome = document.getElementById('nome').value.trim();
     const empresa = document.getElementById('empresa').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
-    const dificuldade = document.getElementById('dificuldade').value;
 
     const mensagem =
 `Olá! Vim pela página sobre vendas de ticket alto.
@@ -501,7 +469,6 @@
 Nome: ${nome}
 Empresa: ${empresa}
 WhatsApp: ${whatsapp}
-Maior dificuldade: ${dificuldade}
 
 Quero marcar minha reunião.`;
 
