@@ -485,15 +485,24 @@
 
     // salva o lead no banco (não bloqueia o envio pro WhatsApp se falhar)
     try {
-      await supabaseClient.from('leads').insert([{
-        nome: nome,
-        empresa: empresa,
-        tamanho_empresa: tamanho,
-        whatsapp: whatsapp,
-        origem: 'landing_page'
-      }]);
+      const { data: insertData, error: insertError } = await supabaseClient
+        .from('leads')
+        .insert([{
+          nome: nome,
+          empresa: empresa,
+          tamanho_empresa: tamanho,
+          whatsapp: whatsapp,
+          origem: 'landing_page'
+        }])
+        .select();
+
+      if (insertError) {
+        console.error('Não foi possível salvar o lead (erro do Supabase):', insertError.message, insertError);
+      } else {
+        console.log('Lead salvo com sucesso:', insertData);
+      }
     } catch (err) {
-      console.error('Não foi possível salvar o lead:', err);
+      console.error('Não foi possível salvar o lead (erro de rede/script):', err);
     }
 
     const mensagem =
