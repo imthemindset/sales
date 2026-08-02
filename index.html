@@ -467,7 +467,7 @@
 <script>
   // ATENÇÃO: troque pelo seu número de WhatsApp, formato internacional sem espaços/símbolos
   // Exemplo: 55 (Brasil) + DDD + número → 5566999999999
-  const WHATSAPP_NUMERO = "5541988935743";
+  const WHATSAPP_NUMERO = "55SEUNUMEROAQUI";
 
   // ATENÇÃO: cole aqui a URL e a chave "anon public" do seu projeto Supabase
   // (Supabase > Project Settings > API)
@@ -478,6 +478,7 @@
 
   document.getElementById('leadForm').addEventListener('submit', async function(e){
     e.preventDefault();
+    alert('Formulário capturado, iniciando envio...');
     const nome = document.getElementById('nome').value.trim();
     const empresa = document.getElementById('empresa').value.trim();
     const tamanho = document.getElementById('tamanho').value;
@@ -497,11 +498,14 @@
         .select();
 
       if (insertError) {
+        alert('ERRO AO SALVAR: ' + insertError.message);
         console.error('Não foi possível salvar o lead (erro do Supabase):', insertError.message, insertError);
       } else {
+        alert('LEAD SALVO COM SUCESSO: ' + JSON.stringify(insertData));
         console.log('Lead salvo com sucesso:', insertData);
       }
     } catch (err) {
+      alert('ERRO DE SCRIPT/REDE: ' + err.message);
       console.error('Não foi possível salvar o lead (erro de rede/script):', err);
     }
 
