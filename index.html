@@ -355,7 +355,7 @@
   <div class="wrap" style="display:contents;">
     <div>
       <div class="eyebrow">Para donos de negócio de ticket alto</div>
-      <h1>Seu time perde venda na <em>régua errada.</em></h1>
+      <h1>Pare de perder vendas de ticket alto por um <em>fechamento mal conduzido.</em></h1>
       <p class="lead">Não é o produto. Não é o mercado. É o processo da reunião. Numa conversa comigo, você entende exatamente onde seu time deixa dinheiro na mesa, e o que fazer a respeito.</p>
       <a href="#diagnostico" class="cta-btn">QUERO DESTRAVAR MINHAS VENDAS →</a>
       <div class="cta-note">Você fala direto comigo, numa reunião online</div>
@@ -436,6 +436,17 @@
           <input type="text" id="empresa" placeholder="Nome do seu negócio" required>
         </div>
         <div class="field">
+          <label for="tamanho">Tamanho da empresa (funcionários)</label>
+          <select id="tamanho" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option>1 a 10</option>
+            <option>11 a 50</option>
+            <option>51 a 100</option>
+            <option>101 a 500</option>
+            <option>Acima de 500</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="whatsapp">Seu WhatsApp</label>
           <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
         </div>
@@ -452,22 +463,45 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ATENÇÃO: troque pelo seu número de WhatsApp, formato internacional sem espaços/símbolos
   // Exemplo: 55 (Brasil) + DDD + número → 5566999999999
   const WHATSAPP_NUMERO = "55SEUNUMEROAQUI";
 
-  document.getElementById('leadForm').addEventListener('submit', function(e){
+  // ATENÇÃO: cole aqui a URL e a chave "anon public" do seu projeto Supabase
+  // (Supabase > Project Settings > API)
+  const SUPABASE_URL = "COLE_AQUI_A_URL_DO_SEU_PROJETO_SUPABASE";
+  const SUPABASE_ANON_KEY = "COLE_AQUI_A_CHAVE_ANON_PUBLIC";
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  document.getElementById('leadForm').addEventListener('submit', async function(e){
     e.preventDefault();
     const nome = document.getElementById('nome').value.trim();
     const empresa = document.getElementById('empresa').value.trim();
+    const tamanho = document.getElementById('tamanho').value;
     const whatsapp = document.getElementById('whatsapp').value.trim();
+
+    // salva o lead no banco (não bloqueia o envio pro WhatsApp se falhar)
+    try {
+      await supabaseClient.from('leads').insert([{
+        nome: nome,
+        empresa: empresa,
+        tamanho_empresa: tamanho,
+        whatsapp: whatsapp,
+        origem: 'landing_page'
+      }]);
+    } catch (err) {
+      console.error('Não foi possível salvar o lead:', err);
+    }
 
     const mensagem =
 `Olá! Vim pela página sobre vendas de ticket alto.
 
 Nome: ${nome}
 Empresa: ${empresa}
+Tamanho da empresa: ${tamanho}
 WhatsApp: ${whatsapp}
 
 Quero marcar minha reunião.`;
