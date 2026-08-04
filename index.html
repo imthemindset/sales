@@ -478,7 +478,6 @@
 
   document.getElementById('leadForm').addEventListener('submit', async function(e){
     e.preventDefault();
-    alert('Formulário capturado, iniciando envio...');
     const nome = document.getElementById('nome').value.trim();
     const empresa = document.getElementById('empresa').value.trim();
     const tamanho = document.getElementById('tamanho').value;
@@ -486,26 +485,21 @@
 
     // salva o lead no banco (não bloqueia o envio pro WhatsApp se falhar)
     try {
-      const { data: insertData, error: insertError } = await supabaseClient
-        .from('leads')
-        .insert([{
-          nome: nome,
-          empresa: empresa,
-          tamanho_empresa: tamanho,
-          whatsapp: whatsapp,
-          origem: 'landing_page'
-        }])
-        .select();
+      const { error: insertError } = await supabaseClient.rpc('inserir_lead', {
+        p_nome: nome,
+        p_empresa: empresa,
+        p_tamanho_empresa: tamanho,
+        p_whatsapp: whatsapp
+      });
 
       if (insertError) {
         alert('ERRO AO SALVAR: ' + insertError.message);
         console.error('Não foi possível salvar o lead (erro do Supabase):', insertError.message, insertError);
       } else {
-        alert('LEAD SALVO COM SUCESSO: ' + JSON.stringify(insertData));
-        console.log('Lead salvo com sucesso:', insertData);
+        alert('LEAD SALVO COM SUCESSO!');
+        console.log('Lead salvo com sucesso.');
       }
     } catch (err) {
-      alert('ERRO DE SCRIPT/REDE: ' + err.message);
       console.error('Não foi possível salvar o lead (erro de rede/script):', err);
     }
 
