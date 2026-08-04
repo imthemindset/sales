@@ -493,10 +493,8 @@
       });
 
       if (insertError) {
-        alert('ERRO AO SALVAR: ' + insertError.message);
         console.error('Não foi possível salvar o lead (erro do Supabase):', insertError.message, insertError);
       } else {
-        alert('LEAD SALVO COM SUCESSO!');
         console.log('Lead salvo com sucesso.');
       }
     } catch (err) {
